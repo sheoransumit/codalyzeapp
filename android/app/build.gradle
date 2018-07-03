@@ -137,6 +137,12 @@ android {
 }
 
 dependencies {
+    compile(project(':react-native-firebase')) {
+        transitive = false
+    }
+    compile "com.google.android.gms:play-services-base:15.0.0"
+    compile "com.google.firebase:firebase-core:15.0.2"
+    compile "com.google.firebase:firebase-auth:15.1.0"
     compile project(':react-native-i18n')
     compile project(':react-native-vector-icons')
     compile project(':react-native-device-info')
@@ -151,3 +157,4 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
+apply plugin: 'com.google.gms.google-services'

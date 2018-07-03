@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "860086257740",
+    "firebase_url": "https://codalyze-d3eea.firebaseio.com",
+    "project_id": "codalyze-d3eea",
+    "storage_bucket": "codalyze-d3eea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:860086257740:android:9c67c45935579a38",
+        "android_client_info": {
+          "package_name": "com.codalyzeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "860086257740-e0q2d7oshp9hteu7epph4pi8impd49g3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEYff8lRq0h3CL6NsptA8iEB0lAiSytdE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
