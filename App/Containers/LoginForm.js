@@ -8,31 +8,48 @@ import {
 } from 'react-native'
 import { Field, reduxForm } from 'redux-form'
 
-const renderInput = ({ input: { onChange, ...restInput }}) => {
-  return <TextInput style={styles.input} onChangeText={onChange} {...restInput} />
-}
-
+// const renderInput = ({ input: { onChange, ...restInput }}) => {
+//   return <TextInput style={styles.input} onChangeText={onChange} {...restInput} />
+// }
 
 class LoginForm extends Component {
   
   constructor(props) {
     super(props);
-    this.state = {email: '', password:''};
-    this.handleSubmit = this.props.handleSubmit.bind(this, this.state);
+    this.state = {text1: '', text2:''};
+    this.updatedmail = this.updatedmail.bind(this);
+    this.updatedpassword = this.updatedpassword.bind(this);
   }
 
+  updatedmail(mai){
+    alert(typeof mai);
+    this.setState({
+        text1: mai
+    });
+  }
+
+  updatedpassword(pass){
+    this.setState({
+      text2: pass
+    });
+  }
+  
   render () {
-    const { handleSubmit } = this.props;
+  
+
     return (
       <View style={styles.container}>
+      
         <Text>Email:</Text>
-        <Field name="email" component = {<TextInput style={styles.input} onChangeText={(email) => this.setState({email})} />} />
+        <Field name="email" component = {<TextInput style={styles.input} onChangeText={(text) => this.updatedmail(text)} />} />
+     
         <Text>Password:</Text>
-        <Field name="password" component = {<TextInput style={styles.input} onChangeText={(password) => this.setState({password})} />} />
+        <Field name="password" component = {<TextInput style={styles.input} onChangeText={(text) => this.updatedpassword(text)} />} />
 
         <TouchableOpacity>
-          <Text style={styles.button} onPress={handleSubmit}>Submit</Text>
+          <Text style={styles.button} onPress={this.props.handleSubmit.bind(this, this.state.text1, this.state.text2)}>Submit</Text>
         </TouchableOpacity>
+      
       </View>
     )
   }

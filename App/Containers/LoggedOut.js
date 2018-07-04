@@ -52,11 +52,13 @@ export default class LoggedOut extends Component {
     super();
     this.state = {
       modalVisible: false,
-      registerVisible: false,
+      registerVisible: false
     };
-    this.values = {email: '', password:''};
-    this.onLogin = this.onLogin.bind(this, this.values);
-    this.onRegister = this.onRegister.bind(this, this.values);
+    this.onLogin = this.onLogin.bind(this);
+    this.onRegister = this.onRegister.bind(this);
+    // this.values = {email: '', password:''};
+    // this.onLogin = this.onLogin.bind(this, this.values);
+    // this.onRegister = this.onRegister.bind(this, this.values);
   }
   state = {
     modalVisible: false,
@@ -64,7 +66,7 @@ export default class LoggedOut extends Component {
   };
 
   setModalVisible(mvisible) {
-    console.log(mvisible)
+    // console.log(mvisible)
     this.setState({modalVisible: mvisible});
   }
 
@@ -72,12 +74,13 @@ export default class LoggedOut extends Component {
     this.setState({registerVisible: rvisible});
   }
 
-  onLogin( values ) {
-    email = values.email;
-    password = values.password;
-  	console.log( email, password );
+  // onLogin( values ) {
+  onLogin(lmail,lpass) {    
+   //  email = values.email;
+   //  password = values.password;
+  	// console.log( email, password );
 	  // const { email, password } = this.state;
-	  firebase.auth().signInWithEmailAndPassword(email, password)
+	  firebase.auth().signInWithEmailAndPassword(lmail, lpass)
 	    .then((user) => {
         this.setState({modalVisible: false});
 	      // If you need to do anything with the user, do it here
@@ -92,12 +95,15 @@ export default class LoggedOut extends Component {
 	    });
 	}
 
-	onRegister( values ) {
+	// onRegister( values ) {
+  onRegister(rmail, rpass) {
 		// console.log(values);
-    email = values.email;
-    password = values.password;
+    // email = values.email;
+    // password = values.password;
 	  // const { email, password } = this.state;
-	  firebase.auth().createUserWithEmailAndPassword(email, password)
+	  alert(rmail, rpass);
+    firebase.auth().createUserWithEmailAndPassword(rmail, rpass)
+
 	    .then((user) => {
         this.setState({registerVisible: false});
 	      // If you need to do anything with the user, do it here
