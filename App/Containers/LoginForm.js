@@ -7,47 +7,87 @@ import {
   View
 } from 'react-native'
 import { Field, reduxForm } from 'redux-form'
-
-// const renderInput = ({ input: { onChange, ...restInput }}) => {
-//   return <TextInput style={styles.input} onChangeText={onChange} {...restInput} />
-// }
+import firebase from 'react-native-firebase';
 
 class LoginForm extends Component {
   
   constructor(props) {
     super(props);
-    this.state = {text1: '', text2:''};
-    this.updatedmail = this.updatedmail.bind(this);
-    this.updatedpassword = this.updatedpassword.bind(this);
+    this.onLogin = this.onLogin.bind(this);
+    this.onRegister = this.onRegister.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  updatedmail(mai){
-    alert(typeof mai);
-    this.setState({
-        text1: mai
-    });
+  submit = values => {
+    console.log('submitting form', values)
   }
 
-  updatedpassword(pass){
-    this.setState({
-      text2: pass
-    });
+  renderInput = ({ input: { onChange, ...restInput }}) => {
+    return <TextInput style={styles.input} onChangeText={onChange} {...restInput} />
   }
+
+
+  onLogin(email,password) {    
+   //  email = values.email;
+   //  password = values.password;
+    // console.log( email, password );
+    // const { email, password } = this.state;
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then((user) => {
+        this.setState({modalVisible: false});
+        // If you need to do anything with the user, do it here
+        // The user will be logged in automatically by the 
+        // `onAuthStateChanged` listener we set up in App.js earlier
+      })
+      .catch((error) => {
+        const { code, message } = error;
+        // For details of error codes, see the docs
+        // The message contains the default Firebase string
+        // representation of the error
+      });
+  }
+
+  onRegister(email, password) {
+    // console.log(values);
+    // email = values.email;
+    // password = values.password;
+    // const { email, password } = this.state;
+    alert(rmail, rpass);
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+
+      .then((user) => {
+        this.setState({registerVisible: false});
+        // If you need to do anything with the user, do it here
+        // The user will be logged in automatically by the
+        // `onAuthStateChanged` listener we set up in App.js earlier
+      })
+      .catch((error) => {
+        const { code, message } = error;
+        // For details of error codes, see the docs
+        // The message contains the default Firebase string
+        // representation of the error
+      });
+  }
+
+  handleSubmit(msubmit){
+    console.log(values)
+    console.log('submitting form', values)
+  }
+
   
   render () {
-  
 
     return (
       <View style={styles.container}>
       
         <Text>Email:</Text>
-        <Field name="email" component = {<TextInput style={styles.input} onChangeText={(text) => this.updatedmail(text)} />} />
+        <Field name="email" component = {renderInput} />} />
      
         <Text>Password:</Text>
-        <Field name="password" component = {<TextInput style={styles.input} onChangeText={(text) => this.updatedpassword(text)} />} />
+        <Field name="password" component = {renderInput} />
 
-        <TouchableOpacity>
-          <Text style={styles.button} onPress={this.props.handleSubmit.bind(this, this.state.text1, this.state.text2)}>Submit</Text>
+        <TouchableOpacity onPress={this.handleSubmit(submit)}>
+          <Text style={styles.button}>Submit</Text>
         </TouchableOpacity>
       
       </View>
